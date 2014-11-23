@@ -37,7 +37,7 @@ function make(marked) {
     var scopeCode = [];
     for (var name in scope) {
       scopeCode.push('var ' + name +
-          ' = require(' + JSON.stringify(scope[name]) + ');');
+          ' = React.createFactory(require(' + JSON.stringify(scope[name]) + '));');
     }
 
     var html = compiled.html;
@@ -47,8 +47,8 @@ function make(marked) {
       'var React      = require("react");',
       '',
       'var _runtime   = require(' + JSON.stringify(runtime) + ');',
-      'var _Wrapper   = _runtime.Wrapper;',
-      'var _Component = ' + component + ';',
+      'var _Wrapper   = React.createFactory(_runtime.Wrapper);',
+      'var _Component = React.createFactory(' + component + ');',
       '',
       'module.exports = function create(props) {',
       '  var _markup    = <_Wrapper>' + html + '</_Wrapper>;',
